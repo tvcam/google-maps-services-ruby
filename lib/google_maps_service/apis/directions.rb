@@ -58,7 +58,7 @@ module GoogleMapsService::Apis
     # @param [String] transit_routing_preference Specifies preferences for transit
     #     requests. Valid values are `less_walking` or `fewer_transfers`.
     #
-    # @return [Array] Array of routes.
+    # @return [Hash] Original response.
     def directions(origin, destination,
         mode: nil, waypoints: nil, alternatives: false, avoid: nil,
         language: nil, units: nil, region: nil, departure_time: nil,
@@ -95,7 +95,7 @@ module GoogleMapsService::Apis
       params[:transit_mode] = GoogleMapsService::Convert.join_list("|", transit_mode) if transit_mode
       params[:transit_routing_preference] = transit_routing_preference if transit_routing_preference
 
-      return get('/maps/api/directions/json', params)[:routes]
+      return get('/maps/api/directions/json', params)
     end
   end
 end
